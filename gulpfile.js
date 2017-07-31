@@ -52,7 +52,7 @@ paths.static = [
     '_src/imgs/**/*'
 ];
 paths.app = '_src/js/app/app.js';
-paths.dest = '/Applications/XAMPP/xamppfiles/htdocs';
+paths.dest = 'dist';
 
 /**
  * Create dynamic pages based on JSON files in our /hbs/data/dynamic directory
@@ -205,8 +205,8 @@ gulp.task('moveStatic', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('build', ['clean', 'bump'], function() {
-    runSequence(['sass', 'scripts', 'handlebars', 'createDynamicPages', 'moveStatic'], 'generate-service-worker');
+gulp.task('build', ['clean', 'bump'], function(cb) {
+    runSequence(['sass', 'scripts', 'handlebars', 'createDynamicPages', 'moveStatic'], 'generate-service-worker', cb);
 });
 
 gulp.task('bump', function() {
