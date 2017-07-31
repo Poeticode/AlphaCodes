@@ -205,8 +205,8 @@ gulp.task('moveStatic', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('build', ['clean', 'bump'], function(cb) {
-    runSequence(['sass', 'scripts', 'handlebars', 'createDynamicPages', 'moveStatic'], 'generate-service-worker', cb);
+gulp.task('build', ['clean', 'bump'], function() {
+    runSequence(['sass', 'scripts', 'handlebars', 'createDynamicPages', 'moveStatic'], 'generate-service-worker');
 });
 
 gulp.task('bump', function() {
