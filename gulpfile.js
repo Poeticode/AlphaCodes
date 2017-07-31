@@ -47,7 +47,7 @@ paths.hbs = [
 /* Miscellaneous files */
 paths.static = [
     '_src/manifest.json',
-    '_src/firebase-messaging-sw.js',
+    // '_src/firebase-messaging-sw.js',
     '_src/fonts/**/*',
     '_src/imgs/**/*'
 ];
