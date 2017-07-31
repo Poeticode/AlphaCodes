@@ -1,16 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>{{ title }}</title>
+{{> header}}
 
-    <link rel="stylesheet" type="text/css" href="./styles/main.css" />
-</head>
-<body>
+<h2>{{title}}</h2>
 
-    <div class="main-wrapper">
-        {{{ contents }}}
-    </div>
+<article>
+    {{{contents}}}
+</article>
 
-</body>
-</html>
+{{> footer}}
