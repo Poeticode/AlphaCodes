@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "partialsName": {
+        "type": "string"
+      },
+      "slug": {
+        "type": "string"
+      },
+      "dest": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "html_content": {
+        "type": "string"
+      },
+      "content": {
+        "type": "string"
+      },
+      "author_notes": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "partialsName",
+      "slug",
+      "dest",
+      "title",
+      "html_content",
+      "content",
+      "author_notes"
+    ]
+  }
+}

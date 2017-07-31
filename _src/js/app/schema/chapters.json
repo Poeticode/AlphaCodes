@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "partialsName": {
+        "type": "string"
+      },
+      "slug": {
+        "type": "string"
+      },
+      "dest": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "posts": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "required": [
+      "partialsName",
+      "slug",
+      "dest",
+      "title",
+      "description",
+      "posts"
+    ]
+  }
+}

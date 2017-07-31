@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+.ftppass
+.ftpdest
+/dist/**/*
+!/dist/manifest.json
+!/dist/imgs
+!/dist/imgs/*
+npm-debug.log

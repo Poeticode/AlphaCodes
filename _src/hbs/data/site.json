@@ -1,0 +1,18 @@
+{
+    "title": "BetaCodes",
+    "root": "/",
+    "tempRoot": "http://localhost/",
+    "menu": [{
+        "name": "About",
+        "link": "about.html"
+    },  {
+        "name": "Book",
+        "link": "book.html"
+    }, {
+        "name": "Projects",
+        "link": "projects.html"
+    }, {
+        "name": "Thoughts",
+        "link": "thoughts.html"
+    }]
+} 

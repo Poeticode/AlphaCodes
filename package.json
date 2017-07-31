@@ -1,0 +1,47 @@
+{
+  "name": "alphacodes",
+  "version": "1.0.29",
+  "description": "Beta site",
+  "main": "./dist/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "env": "env"
+  },
+  "author": "Silas Tippens",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "del": "^2.2.2",
+    "glob": "^7.1.1",
+    "gulp": "*",
+    "gulp-babel": "^6.1.2",
+    "gulp-bump": "^2.5.1",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.1",
+    "gulp-data": "^1.2.1",
+    "gulp-hb": "^5.1.4",
+    "gulp-livereload": "^3.8.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sftp": "^0.1.5",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "history": "^4.4.0",
+    "merge-stream": "^1.0.0",
+    "run-sequence": "^1.2.2",
+    "semver": "^5.3.0",
+    "sw-precache": "^4.2.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "firebase": "^3.6.3",
+    "localforage": "^1.4.3",
+    "path": "^0.12.7",
+    "web-push": "^3.2.1"
+  }
+}

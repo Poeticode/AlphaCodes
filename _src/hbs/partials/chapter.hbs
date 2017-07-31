@@ -1,0 +1,14 @@
+{{> head bodyClass="chapter" }}
+    {{> nav }}  
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col center-cell">
+        <h3>{{this.title}}</h3>
+        <p>{{this.description}}</p> 
+        <ul>
+        {{#each this.posts }}
+            <li>{{lookup (lookup @root.dynamic.posts @index) 'title'}}</li> 
+        {{/each}} 
+        </ul>
+    </div> 
+</div>
+{{> foot }}  
