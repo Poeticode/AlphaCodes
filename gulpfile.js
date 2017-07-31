@@ -11,7 +11,7 @@ var source      = require('vinyl-source-stream');
 var buffer      = require('vinyl-buffer');
 var uglify      = require('gulp-uglify');
 var sourcemaps  = require('gulp-sourcemaps');
-var livereload  = require('gulp-livereload');
+// var livereload  = require('gulp-livereload');
 var sftp = require('gulp-sftp');
 var fs = require('fs');
 var data = require('gulp-data');
@@ -87,7 +87,7 @@ gulp.task('createDynamicPages', function createDynamicPages(done) {
                 }))
                 .pipe(gulp.dest(paths.dest + "/" + fileData.dest))
                 .pipe(gulp.dest('dist/' + fileData.dest))
-                .pipe(livereload());
+                // .pipe(livereload());
             tasks.push(currentTask);
         });
     });
@@ -118,7 +118,7 @@ gulp.task('scripts', function(done) {
         .pipe(rename({ extname : '.'+packageVersion+'.js'}))
         .pipe(gulp.dest(paths.dest+'/js'))
         .pipe(gulp.dest('dist/js/'))
-        .pipe(livereload());
+        // .pipe(livereload());
 });
 
 /**
@@ -137,7 +137,7 @@ gulp.task('sass', function() {
     .pipe(rename({ extname: '.'+packageVersion+'.min.css' }))
     .pipe(gulp.dest(paths.dest+'/css/'))
     .pipe(gulp.dest('dist/css/'))
-    .pipe(livereload());
+    // .pipe(livereload());
 });
 
 /**
@@ -159,7 +159,7 @@ gulp.task('handlebars', function (done) {
         .pipe(hbStream)
         .pipe(gulp.dest(paths.dest))
         .pipe(gulp.dest('dist/'))
-        .pipe(livereload())
+        // .pipe(livereload())
         .on('end', done);
     
 });
@@ -216,7 +216,7 @@ gulp.task('bump', function() {
 });
 
 gulp.task('watch', ['build', 'serve'], function() {
-    livereload.listen();
+    // livereload.listen();
     gulp.watch([paths.css, paths.cssVendor], ['sass']);
     gulp.watch([paths.js, paths.jsVendor], ['scripts']);
     gulp.watch([paths.hbs, paths.partials, paths.data, paths.helpers], ['handlebars', 'createDynamicPages']);
