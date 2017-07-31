@@ -1,5 +1,5 @@
-.DS_Store
+# To avoid uploading the node_modules folder, filled with node.js packages:
 node_modules/
-.ftppass
-.ftpdest
-npm-debug.log
+
+# To avoid uploading the local build folder:
+build/
