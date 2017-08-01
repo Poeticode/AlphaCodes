@@ -89,6 +89,14 @@ Metalsmith(__dirname).ignore('modules')
     pattern: 'admin/*.yml',
     directory: "admin/"
 }))
+.use(copy({
+    pattern: 'images/uploads/**/*.[jpg,png]',
+    directory: "images/uploads/"
+}))
+.use(copy({
+    pattern: 'favicon.ico',
+    directory: "./"
+}))
 .use(offline({
   trailingSlash: false
 }))
