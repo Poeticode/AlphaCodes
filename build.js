@@ -7,6 +7,7 @@ permalinks = require('metalsmith-permalinks'),
 rssfeed = require('metalsmith-feed'),
 sitemap = require('metalsmith-mapsite'),
 sass = require('metalsmith-sass'),
+browserify = require('metalsmith-browserify'),
 devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production'),
 siteMeta = {
   devBuild: devBuild,
@@ -18,7 +19,7 @@ siteMeta = {
 //   rootpath:  devBuild ? null  : '/sitepoint-editors/metalsmith-demo/master/build/' // set absolute path (null for relative)
 };
 
-Metalsmith(__dirname)
+Metalsmith(__dirname).ignore('modules')
 .use(collections({
     pages: {
         pattern: 'pages/*.md'
@@ -69,5 +70,13 @@ Metalsmith(__dirname)
     outputStyle: "expanded",
     outputDir: 'styles/'
 }))
+.use(browserify({
+    dest: 'js/bundle.js',
+    entries: ['./src/js/app.js'],
+    sourceType: 'module',
+    sourcemaps: false,
+    watch: false,
+    transform: [["babelify", { "presets": ["es2015"] }]]
+  }))
 .destination('./build')
 .build(function (err) { if(err) console.log(err) })

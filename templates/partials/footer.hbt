@@ -1,6 +1,7 @@
         </div> {{!-- END .container --}}
         <footer>
-            © Metalsmith demo site - demonstrating Metalsmith in continuous deployment using GitHub on Netlify.
+            © Poeticodes
         </footer>
+        <script src="/js/bundle.js"></script>
     </body>
 </html>
