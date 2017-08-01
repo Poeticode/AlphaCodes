@@ -15,6 +15,7 @@
  */
 
 /* eslint-env browser */
+import { Msg } from "./msg.js";
 'use strict';
 module.exports = function() {
     if ('serviceWorker' in navigator) {
@@ -41,10 +42,14 @@ module.exports = function() {
                     // have been added to the cache.
                     // It's the perfect time to display a "New content is available; please refresh."
                     // message in the page's interface.
+                    var msg = new Msg("Please Refresh!", "New or updated content is available.");
+                    msg.animateIn();
                     console.log('New or updated content is available.');
                 } else {
                     // At this point, everything has been precached.
                     // It's the perfect time to display a "Content is cached for offline use." message.
+                    var msg = new Msg("Good to go!", "This site is now available offline.");
+                    msg.animateIn();
                     console.log('Content is now available offline!');
                 }
                 break;
@@ -56,8 +61,13 @@ module.exports = function() {
             };
         };
         }).catch(function(e) {
-        console.error('Error during service worker registration:', e);
+            var msg = new Msg("Error", "Couldn't register service worker.");
+            msg.animateIn();
+            console.error('Error during service worker registration:', e);
         });
     });
+    } else {
+        var msg = new Msg("Error", "Your device doesn't support Service Workers, which allows this site to function offline.");
+        msg.animateIn();
     }
 }

@@ -1,3 +1,5 @@
+            <div class="msg toast" id="js-toast">
+            </div>
         </div> {{!-- END .container --}}
         <footer>
             © Poeticodes
