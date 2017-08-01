@@ -8,6 +8,7 @@ rssfeed = require('metalsmith-feed'),
 sitemap = require('metalsmith-mapsite'),
 sass = require('metalsmith-sass'),
 browserify = require('metalsmith-browserify'),
+offline = require('metalsmith-offline'),
 devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production'),
 siteMeta = {
   devBuild: devBuild,
@@ -78,5 +79,8 @@ Metalsmith(__dirname).ignore('modules')
     watch: false,
     transform: [["babelify", { "presets": ["es2015"] }]]
   }))
+.use(offline({
+  trailingSlash: false
+}))
 .destination('./build')
 .build(function (err) { if(err) console.log(err) })
