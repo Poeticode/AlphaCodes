@@ -9,6 +9,7 @@ rssfeed = require('metalsmith-feed'),
 sitemap = require('metalsmith-mapsite'),
 sass = require('metalsmith-sass'),
 browserify = require('metalsmith-browserify'),
+imagemin = require('metalsmith-imagemin'),
 offline = require('metalsmith-offline'),
 copy = require('metalsmith-copy'),
 fs = require('fs'),
@@ -93,6 +94,10 @@ function writeServiceWorkerFile(callback) {
 }
 
 Metalsmith(__dirname).ignore('modules')
+.use(imagemin({
+    optimizationLevel: 3,
+    svgoPlugins: [{ removeViewBox: false }]
+  }))
 .use(collections({
     pages: {
         pattern: 'pages/*.md'
@@ -108,7 +113,6 @@ Metalsmith(__dirname).ignore('modules')
 }))
 .use(markdown())
 .use(permalinks({
-
     // original options would act as the keys of a `default` linkset, 
       pattern: ':title',
       date: 'mmddyy',
