@@ -25,6 +25,10 @@ Metalsmith(__dirname).ignore('modules')
     pages: {
         pattern: 'pages/*.md'
     },
+    poetry: {
+        pattern: 'poetry/*.md',
+        sortBy: 'date'
+    },
     articles: {
         pattern: 'articles/*.md',
         sortBy: 'date'
@@ -40,6 +44,10 @@ Metalsmith(__dirname).ignore('modules')
       // each linkset defines a match, and any other desired option
       linksets: [{
           match: { collection: 'articles' },
+          pattern: ':directory/:title',
+          date: 'mmddyy'
+      }, {
+          match: { collection: 'poetry' },
           pattern: ':directory/:title',
           date: 'mmddyy'
       }]
@@ -59,8 +67,8 @@ Metalsmith(__dirname).ignore('modules')
     hostname:     siteMeta.domain + (siteMeta.rootpath || ''),
     omitIndex:    true
   }))
-  .use(rssfeed({                          // generate RSS feed for articles
-    collection:   'articles',
+  .use(rssfeed({                          // generate RSS feed for poetry
+    collection:   'poetry',
     site_url:     siteMeta.domain + (siteMeta.rootpath || ''),
     title:        siteMeta.name,
     description:  siteMeta.desc
