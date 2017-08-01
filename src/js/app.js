@@ -1,3 +1,4 @@
+import $ from "jquery";
 import createHistory from 'history/createBrowserHistory';
 // import localforage from 'localforage';
 
