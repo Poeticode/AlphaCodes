@@ -9,6 +9,7 @@ sitemap = require('metalsmith-mapsite'),
 sass = require('metalsmith-sass'),
 browserify = require('metalsmith-browserify'),
 offline = require('metalsmith-offline'),
+copy = require('metalsmith-copy'),
 devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production'),
 siteMeta = {
   devBuild: devBuild,
@@ -60,9 +61,6 @@ Metalsmith(__dirname).ignore('modules')
         footer: 'partials/footer'
     }
 }))
-// .use(inPlace({
-//     engine: 'handlebars'
-//   }))
 .use(sitemap({                          // generate sitemap.xml
     hostname:     siteMeta.domain + (siteMeta.rootpath || ''),
     omitIndex:    true
@@ -87,6 +85,10 @@ Metalsmith(__dirname).ignore('modules')
     watch: false,
     transform: [["babelify", { "presets": ["es2015"] }]]
   }))
+.use(copy({
+    pattern: 'admin/*.yml',
+    directory: "admin/"
+}))
 .use(offline({
   trailingSlash: false
 }))
