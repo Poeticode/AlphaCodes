@@ -3,6 +3,8 @@ backend:
   repo: Poeticode/AlphaCodes # Path to your Github repository
   branch: master # Branch to update
 
+media_folder: "build/images/uploads"
+
 collections:
   - name: "poetry" # Used in routes, e.g., /admin/collections/blog
     label: "Poetry" # Used in the UI
