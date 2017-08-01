@@ -11,6 +11,8 @@ sass = require('metalsmith-sass'),
 browserify = require('metalsmith-browserify'),
 offline = require('metalsmith-offline'),
 copy = require('metalsmith-copy'),
+fs = require('fs'),
+glob = require('globby'),
 swPrecache = require('sw-precache'),
 devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production'),
 siteMeta = {
@@ -19,56 +21,76 @@ siteMeta = {
   desc:     'A demonstration static site built using Metalsmith',
   author:   'Silas Tippens',
   contact:  'silas@poeti.codes',
-  domain:    'https://alpha.poeti.codes'            // set domain
+  domain:    'https://alpha.poeti.codes',            // set domain
+  cacheManifestLoc: './build/precache.appcache'
 //   rootpath:  devBuild ? null  : '/sitepoint-editors/metalsmith-demo/master/build/' // set absolute path (null for relative)
 };
-
-function writeServiceWorkerFile(rootDir, handleFetch, callback) {
-    var config = {
-      cacheId: siteMeta.name,
-      /*
-      dynamicUrlToDependencies: {
-        'dynamic/page1': [
-          path.join(rootDir, 'views', 'layout.jade'),
-          path.join(rootDir, 'views', 'page1.jade')
-        ],
-        'dynamic/page2': [
-          path.join(rootDir, 'views', 'layout.jade'),
-          path.join(rootDir, 'views', 'page2.jade')
-        ]
-      },
-      */
-      // If handleFetch is false (i.e. because this is called from generate-service-worker-dev), then
-      // the service worker will precache resources but won't actually serve them.
-      // This allows you to test precaching behavior without worry about the cache preventing your
-      // local changes from being picked up during the development cycle.
-      handleFetch: handleFetch,
-      logger: console.logger,
-      runtimeCaching: [{
-        // See https://github.com/GoogleChrome/sw-toolbox#methods
-        urlPattern: /runtime-caching/,
-        handler: 'cacheFirst',
-        // See https://github.com/GoogleChrome/sw-toolbox#options
-        options: {
-          cache: {
-            maxEntries: 1,
-            name: 'runtime-cache'
-          }
-        }
-      }],
-      staticFileGlobs: [
-        rootDir + '/styles/**.css',
-        rootDir + '/**/*.html',
-        rootDir + '/images/**/*.*',
-        rootDir + '/js/**.js'
+var rootDir = "./build";
+var sw_config = {
+    cacheId: siteMeta.name,
+    /*
+    dynamicUrlToDependencies: {
+      'dynamic/page1': [
+        path.join(rootDir, 'views', 'layout.jade'),
+        path.join(rootDir, 'views', 'page1.jade')
       ],
-      stripPrefix: rootDir + '/',
-      // verbose defaults to false, but for the purposes of this demo, log more.
-      verbose: true
-    };
-  
-    swPrecache.write(path.join(rootDir, 'service-worker.js'), config, callback);
-  }
+      'dynamic/page2': [
+        path.join(rootDir, 'views', 'layout.jade'),
+        path.join(rootDir, 'views', 'page2.jade')
+      ]
+    },
+    */
+    // If handleFetch is false (i.e. because this is called from generate-service-worker-dev), then
+    // the service worker will precache resources but won't actually serve them.
+    // This allows you to test precaching behavior without worry about the cache preventing your
+    // local changes from being picked up during the development cycle.
+    handleFetch: true,
+    logger: console.logger,
+    runtimeCaching: [{
+      // See https://github.com/GoogleChrome/sw-toolbox#methods
+      urlPattern: /runtime-caching/,
+      handler: 'cacheFirst',
+      // See https://github.com/GoogleChrome/sw-toolbox#options
+      options: {
+        cache: {
+          maxEntries: 1,
+          name: 'runtime-cache'
+        }
+      }
+    }],
+    staticFileGlobs: [
+      rootDir + '/styles/**.css',
+      rootDir + '/**/*.html',
+      rootDir + '/images/**/*.*',
+      rootDir + '/js/**.js'
+    ],
+    stripPrefix: rootDir + '/',
+    // verbose defaults to false, but for the purposes of this demo, log more.
+    verbose: true
+};
+
+function writeAppCacheManifest() {
+    glob(sw_config.staticFileGlobs).then(files => {
+        // filter out directories
+        files = files.filter(file => fs.statSync(file).isFile())
+
+        // strip out prefix
+        files = files.map(file => file.replace(sw_config.stripPrefix, ''))
+
+        // add the header and join to string
+        const out = ['CACHE MANIFEST', ...files].join('\n')
+
+        // write the file
+        fs.writeFileSync(path.join(__dirname, siteMeta.cacheManifestLoc), out)
+
+        // we're done!
+        console.log(`Wrote ${siteMeta.cacheManifestLoc} with ${files.length} resources.`)
+    })
+}
+
+function writeServiceWorkerFile(callback) {
+    swPrecache.write(path.join(rootDir, 'service-worker.js'), sw_config, callback);
+}
 
 Metalsmith(__dirname).ignore('modules')
 .use(collections({
@@ -154,6 +176,6 @@ Metalsmith(__dirname).ignore('modules')
 .build(function (err) { 
     if(err) console.log(err)
     else {
-        writeServiceWorkerFile('./build', true, null);
+        writeServiceWorkerFile(writeAppCacheManifest);
     }
 })

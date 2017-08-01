@@ -169,7 +169,7 @@ array-unique@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.2.1.tgz#a1d97ccafcbc2625cc70fadceb36a50c58b01a53"
 
-arrify@^1.0.0, arrify@^1.0.1:
+arrify@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
@@ -1896,6 +1896,16 @@ globals@^9.0.0:
   version "9.18.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.18.0.tgz#aa3896b3e69b487f17e31ed2143d69a8e30c2d8a"
 
+globby@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-6.1.0.tgz#f5a6d70e8395e21c858fb0489d64df02424d506c"
+  dependencies:
+    array-union "^1.0.1"
+    glob "^7.0.3"
+    object-assign "^4.0.1"
+    pify "^2.0.0"
+    pinkie-promise "^2.0.0"
+
 globule@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/globule/-/globule-1.2.0.tgz#1dc49c6822dd9e8a2fa00ba2a295006e8664bd09"
@@ -2362,10 +2372,6 @@ is-retry-allowed@^1.0.0:
 is-stream@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
-
-is-string@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/is-string/-/is-string-1.0.4.tgz#cc3a9b69857d621e963725a24caeec873b826e64"
 
 is-typedarray@~1.0.0:
   version "1.0.0"
@@ -3028,10 +3034,6 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "~3.0.0"
 
-lodash@3.x:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
-
 lodash@^2.4.1, lodash@~2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.2.tgz#fadd834b9683073da179b3eae6d9c0d15053f73e"
@@ -3224,17 +3226,6 @@ metalsmith-templates@^0.7.0:
     lodash.omit "~2.4.1"
     multimatch "^0.1.0"
 
-metalsmith-uglify@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/metalsmith-uglify/-/metalsmith-uglify-1.5.2.tgz#793b0b5d0158e58559f46a06cdfa84ca7592d1cc"
-  dependencies:
-    arrify "^1.0.1"
-    is-string "^1.0.4"
-    minimatch "^3.0.3"
-    object-assign "^4.1.0"
-    uglify-js "^2.7.3"
-    upath "^0.2.0"
-
 metalsmith@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/metalsmith/-/metalsmith-2.3.0.tgz#833afbb5a2a6385e2d9ae3d935e39e33eaea5231"
@@ -3336,7 +3327,7 @@ minimatch@^2.0.1:
   dependencies:
     brace-expansion "^1.0.0"
 
-minimatch@^3.0.0, minimatch@^3.0.2, minimatch@^3.0.3, minimatch@^3.0.4, minimatch@~3.0.2:
+minimatch@^3.0.0, minimatch@^3.0.2, minimatch@^3.0.4, minimatch@~3.0.2:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   dependencies:
@@ -4676,7 +4667,7 @@ uglify-es@^3.0.15:
     commander "~2.11.0"
     source-map "~0.5.1"
 
-uglify-js@^2.6, uglify-js@^2.7.3:
+uglify-js@^2.6:
   version "2.8.29"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.29.tgz#29c5733148057bb4e1f75df35b7a9cb72e6a59dd"
   dependencies:
@@ -4711,10 +4702,6 @@ unc-path-regex@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
 
-underscore.string@2.3.x:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-2.3.3.tgz#71c08bf6b428b1133f37e78fa3a21c82f7329b0d"
-
 underscore@^1.7.0:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
@@ -4740,13 +4727,6 @@ unyield@0.0.1:
 unzip-response@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-1.0.2.tgz#b984f0877fc0a89c2c773cc1ef7b5b232b5b06fe"
-
-upath@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/upath/-/upath-0.2.0.tgz#bdbad0f2c60afea165f8127dbb1b5bdee500ad81"
-  dependencies:
-    lodash "3.x"
-    underscore.string "2.3.x"
 
 update-notifier@^1.0.3:
   version "1.0.3"
