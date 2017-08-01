@@ -8,7 +8,6 @@ module.exports = function(history, urlToGet, elementToReplace) {
     xhr.onload = function () { 
         if (xhr.readyState === xhr.DONE) { 
             if (xhr.status === 200) {
-                console.log('loaded in link');
                 var $receivedElement = $(xhr.responseXML).find(elementToReplace);
                 require('./loadelement.js')(history, elementToReplace, $receivedElement);
                 history.push({

@@ -8,7 +8,7 @@ import createHistory from 'history/createBrowserHistory';
     // localforage.setDriver(localforage.INDEXEDDB);
     
     var notification = document.querySelector('.mdl-js-snackbar');
-    require('./modules/service-worker-registration.js')(notification);
+    // require('./modules/service-worker-registration.js')(notification);
 
     const history = createHistory();
     const location = history.location;
