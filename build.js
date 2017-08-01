@@ -1,4 +1,5 @@
 var Metalsmith = require('metalsmith'),
+path = require('path'),
 markdown = require('metalsmith-markdown'),
 templates = require('metalsmith-templates'),
 inPlace = require('metalsmith-in-place'),
@@ -10,6 +11,7 @@ sass = require('metalsmith-sass'),
 browserify = require('metalsmith-browserify'),
 offline = require('metalsmith-offline'),
 copy = require('metalsmith-copy'),
+swPrecache = require('sw-precache'),
 devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production'),
 siteMeta = {
   devBuild: devBuild,
@@ -20,6 +22,53 @@ siteMeta = {
   domain:    'https://alpha.poeti.codes'            // set domain
 //   rootpath:  devBuild ? null  : '/sitepoint-editors/metalsmith-demo/master/build/' // set absolute path (null for relative)
 };
+
+function writeServiceWorkerFile(rootDir, handleFetch, callback) {
+    var config = {
+      cacheId: siteMeta.name,
+      /*
+      dynamicUrlToDependencies: {
+        'dynamic/page1': [
+          path.join(rootDir, 'views', 'layout.jade'),
+          path.join(rootDir, 'views', 'page1.jade')
+        ],
+        'dynamic/page2': [
+          path.join(rootDir, 'views', 'layout.jade'),
+          path.join(rootDir, 'views', 'page2.jade')
+        ]
+      },
+      */
+      // If handleFetch is false (i.e. because this is called from generate-service-worker-dev), then
+      // the service worker will precache resources but won't actually serve them.
+      // This allows you to test precaching behavior without worry about the cache preventing your
+      // local changes from being picked up during the development cycle.
+      handleFetch: handleFetch,
+      logger: console.logger,
+      runtimeCaching: [{
+        // See https://github.com/GoogleChrome/sw-toolbox#methods
+        urlPattern: /runtime-caching/,
+        handler: 'cacheFirst',
+        // See https://github.com/GoogleChrome/sw-toolbox#options
+        options: {
+          cache: {
+            maxEntries: 1,
+            name: 'runtime-cache'
+          }
+        }
+      }],
+      staticFileGlobs: [
+        rootDir + '/styles/**.css',
+        rootDir + '/**/*.html',
+        rootDir + '/images/**/*.*',
+        rootDir + '/js/**.js'
+      ],
+      stripPrefix: rootDir + '/',
+      // verbose defaults to false, but for the purposes of this demo, log more.
+      verbose: true
+    };
+  
+    swPrecache.write(path.join(rootDir, 'service-worker.js'), config, callback);
+  }
 
 Metalsmith(__dirname).ignore('modules')
 .use(collections({
@@ -81,10 +130,14 @@ Metalsmith(__dirname).ignore('modules')
     dest: 'js/bundle.js',
     entries: ['./src/js/app.js'],
     sourceType: 'module',
-    sourcemaps: false,
+    sourcemaps: true,
     watch: false,
-    transform: [["babelify", { "presets": ["es2015"] }]]
-  }))
+    transform: [["babelify", { "presets": ["es2015"] }], ["uglifyify", { global: true}]]
+}))
+// .use(uglify({
+//     sourceMap: true,
+//     compress: true
+// }))
 .use(copy({
     pattern: 'admin/*.yml',
     directory: "admin/"
@@ -97,8 +150,10 @@ Metalsmith(__dirname).ignore('modules')
     pattern: 'favicon.ico',
     directory: "./"
 }))
-.use(offline({
-  trailingSlash: false
-}))
 .destination('./build')
-.build(function (err) { if(err) console.log(err) })
+.build(function (err) { 
+    if(err) console.log(err)
+    else {
+        writeServiceWorkerFile('./build', true, null);
+    }
+})
