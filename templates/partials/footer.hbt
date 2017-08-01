@@ -1,4 +1,4 @@
-        </div> {{!-- END .main-wrapper --}}
+        </div> {{!-- END .container --}}
         <footer>
             © Metalsmith demo site - demonstrating Metalsmith in continuous deployment using GitHub on Netlify.
         </footer>

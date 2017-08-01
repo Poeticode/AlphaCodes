@@ -6,16 +6,17 @@
         <title>Metalsmith Demo Site</title>
 
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="styles/main.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     </head>
     <body>
 
-        <ul>
-            {{#each collections.pages}}
-                <li>
-                    <h3><a href="/{{this.path}}">{{this.title}}</a></h3>
-                </li>
-            {{/each}}
-        </ul>      
+        <nav class="nav" tabindex="-1" onclick="this.focus()">
+			<div class="container">
+				<a class="pagename current" href="#">AlphaCodes</a>
+                {{#each collections.pages}}
+                    <a href="/{{this.path}}">{{this.title}}</a>
+                {{/each}}
+			</div>
+		</nav>
 
-        <div class="main-wrapper">
+        <div class="container">

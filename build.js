@@ -1,10 +1,12 @@
 var Metalsmith = require('metalsmith'),
 markdown = require('metalsmith-markdown'),
 templates = require('metalsmith-templates'),
+inPlace = require('metalsmith-in-place'),
 collections = require('metalsmith-collections'),
 permalinks = require('metalsmith-permalinks'),
 rssfeed = require('metalsmith-feed'),
 sitemap = require('metalsmith-mapsite'),
+sass = require('metalsmith-sass'),
 devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production'),
 siteMeta = {
   devBuild: devBuild,
@@ -48,6 +50,9 @@ Metalsmith(__dirname)
         footer: 'partials/footer'
     }
 }))
+// .use(inPlace({
+//     engine: 'handlebars'
+//   }))
 .use(sitemap({                          // generate sitemap.xml
     hostname:     siteMeta.domain + (siteMeta.rootpath || ''),
     omitIndex:    true
@@ -58,5 +63,11 @@ Metalsmith(__dirname)
     title:        siteMeta.name,
     description:  siteMeta.desc
   }))
+.use(sass({
+    sourceMap: true,
+    sourceMapContents: true,
+    outputStyle: "expanded",
+    outputDir: 'styles/'
+}))
 .destination('./build')
 .build(function (err) { if(err) console.log(err) })
