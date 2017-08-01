@@ -1,7 +1,7 @@
 <ul>
     {{#each collections.pages}}
         <li>
-            <h3><a href="/{{this.path}}">{{this.title}}</a></h3>
+            <h3><a href="/{{this.path}}/">{{this.title}}</a></h3>
         </li>
     {{/each}}
 </ul>

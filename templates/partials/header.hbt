@@ -12,9 +12,9 @@
 
         <nav class="nav" tabindex="-1" onclick="this.focus()">
 			<div class="container">
-				<a class="pagename current" href="#">AlphaCodes</a>
+				<a class="pagename current" href="/">AlphaCodes</a>
                 {{#each collections.pages}}
-                    <a href="/{{this.path}}">{{this.title}}</a>
+                    <a href="/{{this.path}}/">{{this.title}}</a>
                 {{/each}}
 			</div>
 		</nav>
