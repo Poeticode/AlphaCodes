@@ -3,4 +3,4 @@ title: Home
 template: home.hbt
 permalink: false
 ---
-Whatever content we want on our front page...
+Testing out this blazing-fast static-site generator with an easy-to-use CMS!
