@@ -1,6 +1,6 @@
 module.exports = function(history, elementToReplace, $receivedElement) {
     $(elementToReplace).empty().html($receivedElement.children());
-    componentHandler.upgradeDom();
+    // componentHandler.upgradeDom();
     if (elementToReplace === 'body') {
         // this means it's a page load
         var $body = $('body');

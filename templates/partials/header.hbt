@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     </head>
-    <body>
+    <body class="{{ bodyClass }}">
 
         <nav class="nav" tabindex="-1" onclick="this.focus()">
 			<div class="container">
