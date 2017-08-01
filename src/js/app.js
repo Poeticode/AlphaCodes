@@ -1,4 +1,5 @@
 import $ from "jquery";
+window.$ = $;
 import createHistory from 'history/createBrowserHistory';
 // import localforage from 'localforage';
 
