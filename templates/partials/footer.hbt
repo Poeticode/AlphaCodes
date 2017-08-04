@@ -1,9 +1,9 @@
-            <div class="msg toast" id="js-toast">
-            </div>
         </div> {{!-- END .container --}}
         <footer>
             © Poeticodes
         </footer>
+        <div class="msg toast" id="js-toast">
+        </div>
         <script async src="/js/bundle.js"></script>
     </body>
 </html>

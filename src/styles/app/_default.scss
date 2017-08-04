@@ -4,8 +4,14 @@ img {
 
 body {
     position: relative;
+    min-height: 100vh;
 }
 
 .toast {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
     opacity: 0;
+
+    box-sizing: border-box;
 }
