@@ -8,3 +8,4 @@ thumbnail: /images/uploads/chattanooga.png
 ---
 Alright, the image field is no longer required!
 
+
