@@ -71,22 +71,23 @@ var sw_config = {
 };
 
 function writeAppCacheManifest() {
+    return false;
     glob(sw_config.staticFileGlobs).then(files => {
         // filter out directories
-        files = files.filter(file => fs.statSync(file).isFile())
+        files = files.filter(file => fs.statSync(file).isFile());
 
         // strip out prefix
-        files = files.map(file => file.replace(sw_config.stripPrefix, ''))
+        files = files.map(file => file.replace(sw_config.stripPrefix, ''));
 
         // add the header and join to string
-        const out = ['CACHE MANIFEST', ...files].join('\n')
+        const out = ['CACHE MANIFEST', ...files].join('\n');
 
         // write the file
-        fs.writeFileSync(path.join(__dirname, siteMeta.cacheManifestLoc), out)
+        fs.writeFileSync(path.join(__dirname, siteMeta.cacheManifestLoc), out);
 
         // we're done!
-        console.log(`Wrote ${siteMeta.cacheManifestLoc} with ${files.length} resources.`)
-    })
+        console.log(`Wrote ${siteMeta.cacheManifestLoc} with ${files.length} resources.`);
+    });
 }
 
 function writeServiceWorkerFile(callback) {
