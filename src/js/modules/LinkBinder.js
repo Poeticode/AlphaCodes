@@ -2,10 +2,18 @@
 
 class LinkBinder {
     constructor() {
+        var self = this;
+        this.initialContent = document.getElementById("content").innerHTML;
+        this.initialTitle = location.title;
         window.addEventListener("popstate", function (e) {
-            document.title = e.originalEvent.state.title;
-            document.getElementById("content").innerHTML = e.originalEvent.state.content;
-            this.Bind();
+            if (e.state) {
+                document.title = e.state.title;
+                document.getElementById("content").innerHTML = e.state.content;
+            } else {
+                document.title = self.initialTitle;
+                document.getElementById("content").innerHTML = self.initialContent;
+            }
+            self.Bind();
         });
         this.Bind();
     }
