@@ -12,6 +12,7 @@ class LinkBinder {
 
     Bind() {
         var anchors = document.getElementsByTagName('a');
+        var self = this;
         for (var anchor_idx = 0; anchor_idx < anchors.length; anchor_idx++) {
             anchors[anchor_idx].onclick = function(event) {
                 
@@ -19,9 +20,9 @@ class LinkBinder {
                 
                 // Get the URL to load
                 var url = event.target.href;
+                var httpReq = new XMLHttpRequest();
 
-                httpReq = new XMLHttpRequest();
-                httpReq.onreadystatechange = function() {
+                httpReq.onreadystatechange = () => {
                     if (httpReq.readyState === XMLHttpRequest.DONE) {
                         if (httpReq.status === 200) {
                             var regex = /<title>(.*)<\/title>/g;
@@ -38,7 +39,7 @@ class LinkBinder {
                                 'content': content
                             }, title, url);
 
-                            this.Bind();
+                            self.Bind();
                         } else {
                             console.log('There was a problem with the request.');
                         }
