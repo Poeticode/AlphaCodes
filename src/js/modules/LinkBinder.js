@@ -7,6 +7,7 @@ class LinkBinder {
             document.getElementById("content").innerHTML = e.originalEvent.state.content;
             this.Bind();
         });
+        this.Bind();
     }
 
     Bind() {
