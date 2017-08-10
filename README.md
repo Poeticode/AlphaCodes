@@ -8,4 +8,5 @@ A simple static site using [MetalSmith](http://www.metalsmith.io/) and [Netlify 
 * `/src/admin` has the netlify CMS data. You can make a page editable by setting it up in `config.yml` within the folder.
 
 ## TODO
-Place images uploaded through the CMS into the source folder. See [#1](https://github.com/Poeticode/AlphaCodes/issues/1)
+* Place images uploaded through the CMS into the source folder. See [#1](https://github.com/Poeticode/AlphaCodes/issues/1)
+* Only activate AppCache on devices that don't support Service Workers (aka Safari)

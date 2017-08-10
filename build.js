@@ -71,7 +71,6 @@ var sw_config = {
 };
 
 function writeAppCacheManifest() {
-    return false;
     glob(sw_config.staticFileGlobs).then(files => {
         // filter out directories
         files = files.filter(file => fs.statSync(file).isFile());
