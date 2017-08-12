@@ -26,6 +26,10 @@ siteMeta = {
   cacheManifestLoc: './build/precache.appcache'
 //   rootpath:  devBuild ? null  : '/sitepoint-editors/metalsmith-demo/master/build/' // set absolute path (null for relative)
 };
+var cleanNow = function(files, metalsmith, done){
+    var dest = metalsmith.destination();
+    rm(dest);
+};
 var rootDir = "./build";
 var sw_config = {
     cacheId: siteMeta.name,
