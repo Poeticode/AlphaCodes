@@ -12,6 +12,7 @@ browserify = require('metalsmith-browserify'),
 imagemin = require('metalsmith-imagemin'),
 offline = require('metalsmith-offline'),
 copy = require('metalsmith-copy'),
+copyAssets = require('metalsmith-copy-assets-540'),
 fs = require('fs'),
 glob = require('globby'),
 swPrecache = require('sw-precache'),
@@ -98,6 +99,12 @@ function writeServiceWorkerFile(callback) {
 }
 
 Metalsmith(__dirname).ignore('modules')
+.clean(false)
+.use(copyAssets({
+    src: 'build/images/uploads',
+    dest: '../src/images/uploads'
+}))
+.use(cleanNow)
 .use(imagemin({
     optimizationLevel: 3,
     svgoPlugins: [{ removeViewBox: false }]

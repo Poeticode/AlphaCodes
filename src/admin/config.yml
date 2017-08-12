@@ -3,7 +3,7 @@ backend:
   repo: Poeticode/AlphaCodes # Path to your Github repository
   branch: master # Branch to update
 
-media_folder: "src/images/uploads"
+media_folder: "build/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
